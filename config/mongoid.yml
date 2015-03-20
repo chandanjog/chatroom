@@ -1,0 +1,15 @@
+test:
+  sessions:
+    default:
+      database: prioridata_challenge_test
+      hosts:
+        - localhost:27017
+      logger: true
+
+development:
+  sessions:
+    default:
+      database: prioridata_challenge_development
+      hosts:
+        - localhost:27017
+      logger: true
