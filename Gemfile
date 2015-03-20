@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'unicorn'
 gem 'mongoid', '~> 4.0.0'
 gem 'twitter-bootstrap-rails'
+gem 'nokogiri'
 
 
 # Use Capistrano for deployment
