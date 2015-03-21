@@ -4,5 +4,8 @@ class ChatroomController < ApplicationController
   end
 
   def comment
+    translated_message = Dialect.find(session['dialect_slug']).translate(params['message'])
+    Comment.create!(username: session['username'], dialect: session['dialect_slug'], message: translated_message)
+    render json: {success: true}
   end
 end

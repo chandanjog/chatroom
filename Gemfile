@@ -22,11 +22,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-gem 'unicorn'
+gem 'thin'
 gem 'mongoid', '~> 4.0.0'
+gem 'database_cleaner'
 gem 'twitter-bootstrap-rails'
 gem 'nokogiri'
+gem 'websocket-rails'
+gem 'momentjs-rails'
 
 
 # Use Capistrano for deployment

@@ -1,22 +1,22 @@
 <div class="panel panel-default" id="comments" style="height: 300px; overflow-y: scroll;">
     <div class="panel-body">
-        <ul class="media-list">
-            <li class="media comment">
-                <span class="pull-left"><%= image_tag('yoda.ico', class: 'media-object', width: '48px') %></span>
+        <ul class="media-list user_posts">
+            <li class="media" style="display: none" id="user_post">
+                <span class="pull-left"><%= image_tag('', class: 'media-object post_dialect', width: '48px') %></span>
                 <div class="media-body">
-                    <h4 class="media-heading">Username
-                        <small class="text-muted">at 20 March 2015, 19:05:40</small>
+                    <h4 class="media-heading post_username">
                     </h4>
-                    <p>test</p>
+                    <p class="post_message"></p>
                 </div>
             </li>
         </ul>
     </div>
 </div>
 <div class="well commentbox">
-    <%= form_tag("/chatroom", method: "post") do %>
-      <%= label_tag(:comment_label, 'Enter your comment') %>
-      <%= text_area(:comment, cols: 20, rows: 40) %>
-      <%= submit_tag('Post', class: 'btn btn-default') %>
-    <% end %>
+  <div id="comment_error" class="alert alert-danger" role="alert" style="display: none">
+      <span class="sr-only">Error:</span>
+  </div>
+  <label id="comment_label">Enter your comment</label>
+  <textarea id="user_comment" class="form-control custom-control" rows="3" style="resize:none"></textarea>
+  <input type="button" id="post_comment" value="Post" class="btn btn-default">
 </div>
