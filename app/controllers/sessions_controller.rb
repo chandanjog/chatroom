@@ -16,4 +16,10 @@ class SessionsController < ApplicationController
     @dialect_options = Dialect.select_options
     render layout: 'without_sidebar'
   end
+
+  def logout
+    session['username'] = nil
+    session['dialect_slug'] = nil
+    redirect_to '/sessions/new'
+  end
 end

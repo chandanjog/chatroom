@@ -7,10 +7,13 @@
         </button>
         <a class="navbar-brand" href="#">Chatroom</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav">
-                <!--<li><%= link_to "Link1", "/path1"  %></li>-->
-                <!--<li><%= link_to "Link2", "/path2"  %></li>-->
-                <!--<li><%= link_to "Link3", "/path3"  %></li>-->
+            <ul class="nav navbar-nav navbar-right">
+                <% if session['username'] %>
+                  <li><a href="#">Welcome, <%= session['username'] %></a></li>
+                  <li><a href="/sessions/logout">Logout</a></li>
+                <% else %>
+                  <li><a href="/sessions/new">Login</a></li>
+                <% end %>
             </ul>
         </div>
     </div>

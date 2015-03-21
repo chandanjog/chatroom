@@ -9,7 +9,7 @@ APP.Chatroom = function(){
             });
             post_markup.find('.post_username').html(post.username + '<small class="text-muted post_created_at">' + moment(post.created_at).format("dddd, MMMM Do YYYY, h:mm:ss a") + '</small>');
             post_markup.find('.post_message').text(post.message);
-            $(".user_posts").append(post_markup.show());
+            $(".user_posts").prepend(post_markup.show());
         });
     }
 

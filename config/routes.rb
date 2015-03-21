@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :new]
+  get 'sessions/logout' => 'sessions#logout'
+
   get 'chatroom/index' => 'chatroom#index'
   post 'chatroom' => 'chatroom#comment'
   root 'chatroom#index'

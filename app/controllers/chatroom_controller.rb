@@ -1,5 +1,6 @@
 class ChatroomController < ApplicationController
   def index
+    @latest_comments = Comment.limit(5).desc(:created_at).to_a
     redirect_to '/sessions/new' if session['username'].nil?
   end
 

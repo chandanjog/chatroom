@@ -38,4 +38,17 @@ describe SessionsController, type: :controller do
       expect(response).to render_template('new')
     end
   end
+
+  describe 'GET #logout' do
+    it 'should clear the session' do
+      session['username'] = 'foo'
+      session['dialect_slug'] = 'bar'
+
+      get :logout
+
+      expect(session['username']).to be nil
+      expect(session['dialect_slug']).to be nil
+      expect(response).to redirect_to('/sessions/new')
+    end
+  end
 end
