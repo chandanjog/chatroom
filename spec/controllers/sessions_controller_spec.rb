@@ -5,7 +5,7 @@ describe SessionsController, type: :controller do
   describe 'GET #new' do
     it 'assigns dialect options' do
       get :new
-      expect(assigns(:dialect_options)).to eq(SessionsController::DIALECT_OPTIONS)
+      expect(assigns(:dialect_options)).to eq(Dialect.select_options)
       expect(response).to render_template('new')
     end
   end
@@ -26,7 +26,7 @@ describe SessionsController, type: :controller do
       post :create, username: '', dialect_slug: 'pirate'
 
       expect(assigns(:error_message)).to eq(SessionsController::MISSING_USERNAME_OR_DIALECT_ERROR_MSG)
-      expect(assigns(:dialect_options)).to eq(SessionsController::DIALECT_OPTIONS)
+      expect(assigns(:dialect_options)).to eq(Dialect.select_options)
       expect(response).to render_template('new')
     end
 
@@ -34,7 +34,7 @@ describe SessionsController, type: :controller do
       post :create, username: 'foo', dialect_slug: ''
 
       expect(assigns(:error_message)).to eq(SessionsController::MISSING_USERNAME_OR_DIALECT_ERROR_MSG)
-      expect(assigns(:dialect_options)).to eq(SessionsController::DIALECT_OPTIONS)
+      expect(assigns(:dialect_options)).to eq(Dialect.select_options)
       expect(response).to render_template('new')
     end
   end

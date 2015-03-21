@@ -1,10 +1,9 @@
 class SessionsController < ApplicationController
   MISSING_USERNAME_OR_DIALECT_ERROR_MSG = 'Username or Dialect cannot be empty'
-  DIALECT_OPTIONS = [['Pirate', 'pirate'], ['Yoda', 'yoda'], ['Valley Girl', 'valley-girl']]
 
   def create
     if params['username'].empty? || params['dialect_slug'].empty?
-      @dialect_options = DIALECT_OPTIONS
+      @dialect_options = Dialect.select_options
       @error_message = MISSING_USERNAME_OR_DIALECT_ERROR_MSG
       return render '/sessions/new', layout: 'without_sidebar'
     end
@@ -14,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def new
-    @dialect_options = DIALECT_OPTIONS
+    @dialect_options = Dialect.select_options
     render layout: 'without_sidebar'
   end
 end

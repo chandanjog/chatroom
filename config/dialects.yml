@@ -1,0 +1,12 @@
+-
+  slug: pirate
+  name: Pirate
+  endpoint: 'http://isithackday.com/arrpi.php'
+-
+  slug: yoda
+  name: Yoda
+  endpoint: "http://www.degraeve.com/cgi-bin/babel.cgi"
+-
+  slug: valley-girl
+  name: Valley Girl
+  endpoint: "http://www.degraeve.com/cgi-bin/babel.cgi"
