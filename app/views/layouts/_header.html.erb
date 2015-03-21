@@ -31,4 +31,9 @@
 <!-- Size should be 32 x 32 pixels -->
 <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
+<%= javascript_tag do %>
+  var APP = APP || {};
+  APP.websocketEndpoint = '<%= "#{root_url.sub(/^https?\:\/\//, '')}websocket" %>';
+<% end %>
+
 <%= javascript_include_tag "application" %>

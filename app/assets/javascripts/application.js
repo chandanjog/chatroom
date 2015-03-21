@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require websocket_rails/main
 //= require moment
+//= require comments
+//= require site
 //= require_tree .
 
 
