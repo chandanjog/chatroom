@@ -6,7 +6,27 @@ footer{
   margin-top: 20px;
 }
 
-form {
+form.login {
   margin: 0 auto;
   width:250px;
+}
+
+form{
+  margin: 0 auto;
+}
+
+.commentbox label{
+  text-align: center;
+  display: block;
+}
+.commentbox textarea{
+  margin: 0 auto;
+  display: block;
+  width: 60%;
+  height: 50%;
+}
+
+.commentbox input{
+  margin: 10px auto;
+  display: block;
 }

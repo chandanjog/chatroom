@@ -1,0 +1,17 @@
+<% if @error_message.present? %>
+  <div class="alert alert-danger" role="alert">
+      <span class="sr-only">Error:</span>
+      <%= @error_message %>
+  </div>
+<% end %>
+<%= form_tag("/sessions", method: "post", class: 'login') do %>
+<div class="form-group">
+    <%= label_tag(:username, 'Username') %>
+    <%= text_field_tag(:username, '', class: 'form-control') %>
+</div>
+<div class="form-group">
+  <%= label_tag(:username, 'Dialect') %>
+  <%= select_tag(:dialect_slug, options_for_select(@dialect_options), {class: 'form-control', include_blank: 'Select a Dialect'}) %>
+</div>
+<%= submit_tag('Enter Chatroom', class: 'btn btn-default') %>
+<% end %>
