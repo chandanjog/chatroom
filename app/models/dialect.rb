@@ -8,9 +8,13 @@ class Dialect
   end
 
   def translate(message)
-    return api_response({:text => message, :format => 'json'}, message, :json) if slug == 'pirate'
-    return api_response({:d => 'yoda', :w => message}, message, :html) if slug == 'yoda'
-    return api_response({:d => 'valley', :w => message}, message, :html) if slug == 'valley-girl'
+    res = Net::HTTP.get_response(uri(message))
+    return message unless res.is_a?(Net::HTTPSuccess)
+    if slug == 'pirate'
+      JSON.parse(res.body)['translation']['pirate']
+    else
+      Nokogiri::HTML(res.body).css('blockquote p').text.strip
+    end
   end
 
   def self.all
@@ -30,19 +34,13 @@ class Dialect
 
   private
 
-  def api_response(params, message, response_type)
-    res = Net::HTTP.get_response(uri(params))
-    return message unless res.is_a?(Net::HTTPSuccess)
-    if response_type == :json
-      JSON.parse(res.body)['translation']['pirate']
-    elsif response_type == :html
-      Nokogiri::HTML(res.body).css('blockquote p').text.strip
-    end
+  def uri(message)
+    uri = URI(endpoint)
+    uri.query = URI.encode_www_form(request_params(message))
+    uri
   end
 
-  def uri(params)
-    uri = URI(endpoint)
-    uri.query = URI.encode_www_form(params)
-    uri
+  def request_params(message)
+    slug == 'pirate' ? {:text => message, :format => 'json'} : {:d => slug, :w => message}
   end
 end
