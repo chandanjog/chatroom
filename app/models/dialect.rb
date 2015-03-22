@@ -1,3 +1,5 @@
+require 'net/http'
+
 class Dialect
   attr_reader :name, :slug, :endpoint
 
