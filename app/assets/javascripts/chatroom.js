@@ -67,7 +67,7 @@ APP.CommentBox = function () {
         var message = inputTextArea.val();
         if (message === "") {
             errorSection.text(emptyCommentErrorMsg).show();
-            inputTextArea.prop('disabled', false);
+            enableAndFocus();
         }
         else{
             $.ajax({
@@ -79,14 +79,19 @@ APP.CommentBox = function () {
                 success: function (data) {
                     errorSection.hide();
                     inputTextArea.val('');
-                    inputTextArea.prop('disabled', false);
+                    enableAndFocus();
                 },
                 error: function () {
                     errorSection.text(serverErrorPostingComment).show();
-                    inputTextArea.prop('disabled', false);
+                    enableAndFocus();
                 }
             });
         }
+    }
+
+    function enableAndFocus(){
+        inputTextArea.prop('disabled', false);
+        inputTextArea.focus();
     }
 
     return{
