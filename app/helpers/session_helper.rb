@@ -5,7 +5,7 @@ module SessionHelper
     session['username'] = params['username']
     session['dialect_slug'] = params['dialect_slug']
     filename = File.expand_path('../../views/chatroom/_active_users.html.erb', __FILE__)
-    WebsocketRails[:active_usernames].trigger 'add', ::ErbHelper.load_erb(filename, :active_usernames, [session_username])
+    WebsocketRails[:active_usernames].trigger 'add', ::ErbHelper.load_erb(filename, {active_usernames: [session_username]})
   end
 
   def logout_user

@@ -16,6 +16,6 @@ class ChatroomController < ApplicationController
   private
   def push_to_clients(comment)
     filename = File.expand_path('../../views/chatroom/_comment.html.erb', __FILE__)
-    WebsocketRails[:posts].trigger 'new', ErbHelper.load_erb(filename, :comment, comment)
+    WebsocketRails[:posts].trigger 'new', ErbHelper.load_erb(filename, {comment: comment})
   end
 end

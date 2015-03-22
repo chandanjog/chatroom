@@ -7,6 +7,6 @@ namespace :db do
 
     filename = File.expand_path('../../../app/views/chatroom/_active_users.html.erb', __FILE__)
     active_usernames = MongoidStore::Session.all.collect{|x| Marshal::load(x.data.data)['username']}
-    WebsocketRails[:active_usernames].trigger 'refresh_all', ErbHelper.load_erb(filename, :active_usernames, active_usernames)
+    WebsocketRails[:active_usernames].trigger 'refresh_all', ErbHelper.load_erb(filename, {active_usernames: active_usernames})
   end
 end
