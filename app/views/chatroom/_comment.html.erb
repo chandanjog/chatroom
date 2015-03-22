@@ -1,0 +1,12 @@
+<li class="media" id="user_post">
+    <span class="pull-left">
+        <img class="media-object post_dialect" width="48px" src="/assets/<%= comment.dialect %>.ico" alt="Yoda">
+    </span>
+    <div class="media-body">
+        <h4 class="media-heading post_username">
+            <%= comment.username %>
+            <small class="text-muted post_created_at">on <%= comment.created_at.strftime("%m/%d/%Y at %I:%M%p") %></small>
+        </h4>
+        <p class="post_message"><%= comment.message %></p>
+    </div>
+</li>

@@ -2,25 +2,8 @@
     <div class="panel-body">
         <ul class="media-list user_posts">
             <% @latest_comments.each do |comment| %>
-              <li class="media" id="user_post">
-                  <span class="pull-left"><%= image_tag("#{comment.dialect}.ico", class: 'media-object post_dialect', width: '48px') %></span>
-                        <div class="media-body">
-                            <h4 class="media-heading post_username">
-                                <%= comment.username %>
-                                <small class="text-muted post_created_at"><%= comment.created_at %></small>
-                            </h4>
-                            <p class="post_message"><%= comment.message %></p>
-                        </div>
-              </li>
+              <%= render partial: 'comment', locals: {comment: comment}%>
             <% end %>
-            <li class="media" style="display: none" id="user_post">
-                <span class="pull-left"><%= image_tag('', class: 'media-object post_dialect', width: '48px') %></span>
-                <div class="media-body">
-                    <h4 class="media-heading post_username">
-                    </h4>
-                    <p class="post_message"></p>
-                </div>
-            </li>
         </ul>
     </div>
 </div>

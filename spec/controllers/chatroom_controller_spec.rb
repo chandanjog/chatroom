@@ -22,17 +22,21 @@ describe ChatroomController, type: :controller do
   end
 
   describe 'POST #comment' do
-    it 'should translate the message and update the db' do
-      expect(Comment.all.count).to eq(0)
-      session['username'] = 'foo'
-      session['dialect_slug'] = 'pirate'
+    it 'should translate the message and update the db, and push to clients on websocket' do
+      Timecop.freeze(Time.local(2008, 9, 1, 12, 0, 0)) do
+        expect(WebsocketRails[:posts]).to receive(:trigger).with('new', "<li class=\"media\" id=\"user_post\">\n    <span class=\"pull-left\">\n        <img class=\"media-object post_dialect\" width=\"48px\" src=\"/assets/valley-girl.ico\" alt=\"Yoda\">\n    </span>\n    <div class=\"media-body\">\n        <h4 class=\"media-heading post_username\">\n            foo\n            <small class=\"text-muted post_created_at\">on 09/01/2008 at 10:00AM</small>\n        </h4>\n        <p class=\"post_message\">hello people</p>\n    </div>\n</li>\n")
 
-      post :comment, message: 'hello people'
-      expect(Comment.all.count).to eq(1)
-      expect(Comment.first.username).to eq('foo')
-      expect(Comment.first.dialect).to eq('pirate')
-      expect(Comment.first.message).to match(/^a(hoy|vast) people/)
-      expect(Comment.first.created_at).to_not be nil
+        expect(Comment.all.count).to eq(0)
+        session['username'] = 'foo'
+        session['dialect_slug'] = 'valley-girl'
+
+        post :comment, message: 'hello people'
+        expect(Comment.all.count).to eq(1)
+        expect(Comment.first.username).to eq('foo')
+        expect(Comment.first.dialect).to eq('valley-girl')
+        expect(Comment.first.message).to eq('hello people')
+        expect(Comment.first.created_at).to_not be nil
+      end
     end
   end
 end
