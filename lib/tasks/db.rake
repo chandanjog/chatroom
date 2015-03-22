@@ -6,6 +6,6 @@ namespace :db do
     MongoidStore::Session.where(:updated_at.lt => Rails.configuration.session_timeout_in_minutes.minutes.ago).delete_all
 
     active_usernames = MongoidStore::Session.all.collect{|x| Marshal::load(x.data.data)['username']}
-    WebsocketRails[:active_usernames].trigger 'refresh_all', Template.load('chatroom/_active_users.html.erb', :active_usernames, active_usernames)
+    Websocket.trigger(:active_usernames, 'refresh_all', Template.load('chatroom/_active_users.html.erb', :active_usernames, active_usernames))
   end
 end

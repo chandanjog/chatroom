@@ -15,6 +15,6 @@ class ChatroomController < ApplicationController
 
   private
   def push_to_clients(comment)
-    WebsocketRails[:posts].trigger 'new', ::Template.load('chatroom/_comment.html.erb', :comment, comment)
+    Websocket.trigger(:posts, 'new', Template.load('chatroom/_comment.html.erb', :comment, comment))
   end
 end

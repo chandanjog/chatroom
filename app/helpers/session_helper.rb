@@ -4,11 +4,11 @@ module SessionHelper
   def login_user
     session['username'] = params['username']
     session['dialect_slug'] = params['dialect_slug']
-    WebsocketRails[:active_usernames].trigger 'add', ::Template.load('chatroom/_active_users.html.erb', :active_usernames, [session_username])
+    Websocket.trigger(:active_usernames, 'add', ::Template.load('chatroom/_active_users.html.erb', :active_usernames, [session_username]))
   end
 
   def logout_user
-    WebsocketRails[:active_usernames].trigger 'remove', session_username
+    Websocket.trigger(:active_usernames, 'remove', session_username)
     session['username'] = nil
     session['dialect_slug'] = nil
   end
