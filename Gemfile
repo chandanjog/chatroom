@@ -32,8 +32,9 @@ gem 'websocket-rails'
 gem 'momentjs-rails'
 gem 'browser-timezone-rails'
 gem 'mongo_session_store-rails4'
-gem 'whenever', :require => false
 gem 'rails_12factor'
+gem 'clockwork'
+gem 'foreman'
 
 
 # Use Capistrano for deployment
