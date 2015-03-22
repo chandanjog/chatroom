@@ -13,7 +13,7 @@
 #   rake "some:great:rake:task"
 # end
 #
-every '*/10 * * * *' do
+every "*/#{Rails.configuration.session_timeout_in_minutes} * * * *" do
   rake 'db:delete_old_sessions'
 end
 
