@@ -8,8 +8,8 @@
         <a class="navbar-brand" href="#">Chatroom</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <% if session['username'] %>
-                  <li><a href="#">Welcome, <%= session['username'] %></a></li>
+                <% if logged_in? %>
+                  <li><a href="#">Welcome, <%= session_username %></a></li>
                   <li><a href="/sessions/logout">Logout</a></li>
                 <% else %>
                   <li><a href="/sessions/new">Login</a></li>
