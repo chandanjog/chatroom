@@ -15,22 +15,10 @@ form{
   margin: 0 auto;
 }
 
-.commentbox{
-  label{
-    text-align: left;
-    display: block;
-  }
-  textarea{
-    display: inline;
-    width: 80%;
-    height: 40%;
-  }
-  input{
-    display: inline;
-    margin: 0 0 29px 20px;
-  }
-}
-
 .post_created_at{
   padding-left: 10px;
+}
+
+#comment_error{
+  margin-top: 20px;
 }

@@ -67,6 +67,7 @@ APP.CommentBox = function () {
         var message = inputTextArea.val();
         if (message === "") {
             errorSection.text(emptyCommentErrorMsg).show();
+            inputTextArea.prop('disabled', false);
         }
         else{
             $.ajax({
