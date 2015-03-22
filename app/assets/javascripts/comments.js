@@ -25,29 +25,48 @@ APP.CommentBox = function () {
 
     var postOnClick = function () {
         submitButton.click(function () {
-            var message = inputTextArea.val();
-            if (message === "") {
-                errorSection.text(emptyCommentErrorMsg).show();
-            }
-            else {
-                $.ajax({
-                    type: "POST",
-                    url: '/chatroom',
-                    data: {
-                        message: $('#user_comment').val()
-                    },
-                    success: function (data) {
-                        errorSection.hide();
-                    },
-                    error: function () {
-                        errorSection.text(serverErrorPostingComment).show();
-                    }
-                });
+            validateAndCallServer();
+        });
+        return APP.CommentBox();
+    }
+
+    var postOnEnterKeypress = function(){
+        inputTextArea.keypress(function(e) {
+            if(e.which == 13) {
+                validateAndCallServer();
             }
         });
+        return APP.CommentBox();
+    }
+
+    function validateAndCallServer(){
+        inputTextArea.prop('disabled', true);
+        var message = inputTextArea.val();
+        if (message === "") {
+            errorSection.text(emptyCommentErrorMsg).show();
+        }
+        else{
+            $.ajax({
+                type: "POST",
+                url: '/chatroom',
+                data: {
+                    message: $('#user_comment').val()
+                },
+                success: function (data) {
+                    errorSection.hide();
+                    inputTextArea.val('');
+                    inputTextArea.prop('disabled', false);
+                },
+                error: function () {
+                    errorSection.text(serverErrorPostingComment).show();
+                    inputTextArea.prop('disabled', false);
+                }
+            });
+        }
     }
 
     return{
-        postOnClick: postOnClick
+        postOnClick: postOnClick,
+        postOnEnterKeypress: postOnEnterKeypress
     };
 }
