@@ -30,6 +30,8 @@ gem 'nokogiri'
 gem 'websocket-rails'
 gem 'momentjs-rails'
 gem 'browser-timezone-rails'
+gem 'mongo_session_store-rails4'
+gem 'whenever', :require => false
 
 
 # Use Capistrano for deployment

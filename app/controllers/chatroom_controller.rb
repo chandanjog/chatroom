@@ -1,7 +1,9 @@
 class ChatroomController < ApplicationController
   def index
+    @active_usernames = active_session_usernames
     @latest_comments = Comment.limit(5).desc(:created_at).to_a
-    redirect_to '/sessions/new' unless logged_in?
+    return redirect_to '/sessions/new' unless logged_in?
+    render layout: 'with_active_users_sidebar'
   end
 
   def comment
@@ -14,9 +16,6 @@ class ChatroomController < ApplicationController
   private
   def push_to_clients(comment)
     filename = File.expand_path('../../views/chatroom/_comment.html.erb', __FILE__)
-    binding_object = binding
-    binding_object.local_variable_set(:comment, comment)
-    erb = ERB.new(File.new(filename).read).result(binding_object)
-    WebsocketRails[:posts].trigger 'new', erb
+    WebsocketRails[:posts].trigger 'new', ErbHelper.load_erb(filename, :comment, comment)
   end
 end

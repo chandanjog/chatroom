@@ -1,4 +1,4 @@
-APP.Chatroom = function () {
+APP.ChatMessages = function () {
     var websocketPostsChannel = new WebSocketRails(APP.websocketEndpoint).subscribe('posts');
     var commentsSection = $(".user_posts");
 
@@ -8,12 +8,35 @@ APP.Chatroom = function () {
             commentsSection.prepend($(post).fadeIn());
             commentsSection.scrollTop(0);
         });
-    }
+    };
 
     return{
         updateOnNewComment: updateOnNewComment
     };
 };
+
+APP.ActiveUsersList = function () {
+    var websocketActiveUsersChannel = new WebSocketRails(APP.websocketEndpoint).subscribe('active_usernames');
+    var activeUsersList = $(".active_users");
+
+    var keepUpdated = function(){
+        websocketActiveUsersChannel.bind('add', function(html) {
+            activeUsersList.prepend($(html).fadeIn());
+        });
+
+        websocketActiveUsersChannel.bind('remove', function(username) {
+            activeUsersList.find('li#' + username).remove();
+        });
+
+        websocketActiveUsersChannel.bind('refresh_all', function(html) {
+            activeUsersList.html($(html).fadeIn());
+        });
+    ;}
+
+    return{
+        keepUpdated: keepUpdated
+    }
+}
 
 APP.CommentBox = function () {
     var submitButton = $('#post_comment');

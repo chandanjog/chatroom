@@ -1,4 +1,5 @@
 $(document).ready(function(){
-    APP.Chatroom().updateOnNewComment();
+    APP.ChatMessages().updateOnNewComment();
     APP.CommentBox().postOnClick().postOnEnterKeypress();
+    APP.ActiveUsersList().keepUpdated();
 });

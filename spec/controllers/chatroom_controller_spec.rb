@@ -5,18 +5,22 @@ describe ChatroomController, type: :controller do
 
   describe 'GET #index' do
     it 'should render template if a session username exists' do
-      session['username'] = 'foo'
-      get :index
-      expect(response).to render_template('index')
-    end
-
-    it 'should redirect to sessions/new if a session username does not exist' do
-      (1..5).each {|x| Comment.create!(username: 'foo', message: "#{x} foo bar zoo", dialect: 'pirate')}
+      username = 'foo'
+      MongoidStore::Session.create(data: BSON::Binary.new(Marshal::dump({'username' => username})))
+      session['username'] = username
+      (1..5).each {|x| Comment.create!(username: username, message: "#{x} foo bar zoo", dialect: 'pirate')}
 
       get :index
 
       expect(assigns['latest_comments'].count).to eq(5)
       expect(assigns['latest_comments'].first.message).to eq('5 foo bar zoo')
+      expect(assigns['active_usernames'].count).to eq(1)
+      expect(assigns['active_usernames'].first).to eq(username)
+      expect(response).to render_template('index')
+    end
+
+    it 'should redirect to sessions/new if a session username does not exist' do
+      get :index
       expect(response).to redirect_to('/sessions/new')
     end
   end

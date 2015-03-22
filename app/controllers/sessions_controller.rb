@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       @error_message = MISSING_USERNAME_OR_DIALECT_ERROR_MSG
       return render '/sessions/new', layout: 'without_sidebar'
     end
-    set_user_session_details
+    login_user
     redirect_to '/chatroom/index'
   end
 
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    clear_session
+    logout_user
     redirect_to '/sessions/new'
   end
 end
