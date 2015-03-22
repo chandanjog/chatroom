@@ -1,6 +1,6 @@
 <li class="media" id="user_post">
     <span class="pull-left">
-        <img class="media-object post_dialect" width="48px" src="/assets/<%= comment.dialect %>.ico" alt="Yoda">
+        <%= image_tag("#{comment.dialect}.ico", class: "media-object post_dialect", width: '48px') %>
     </span>
     <div class="media-body">
         <h4 class="media-heading post_username">
