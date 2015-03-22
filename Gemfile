@@ -32,6 +32,7 @@ gem 'momentjs-rails'
 gem 'browser-timezone-rails'
 gem 'mongo_session_store-rails4'
 gem 'whenever', :require => false
+gem 'rails_12factor'
 
 
 # Use Capistrano for deployment
