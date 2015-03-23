@@ -75,5 +75,5 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.middleware.delete Rack::Lock
-  config.session_timeout_in_minutes = 10
+  config.session_timeout_in_minutes = 1
 end
