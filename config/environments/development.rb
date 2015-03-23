@@ -37,5 +37,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.middleware.delete Rack::Lock
-  config.session_timeout_in_minutes = 1
+  config.session_timeout_in_minutes = 10
 end
