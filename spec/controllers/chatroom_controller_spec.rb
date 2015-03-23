@@ -28,7 +28,7 @@ describe ChatroomController, type: :controller do
   describe 'POST #comment' do
     it 'should translate the message and update the db, and push to clients on websocket' do
       Timecop.freeze(Time.local(2008, 9, 1, 12, 0, 0)) do
-        expect(WebsocketRails[:posts]).to receive(:trigger).with('new', "<li class=\"media\" id=\"user_post\">\n    <span class=\"pull-left\">\n        <img class=\"media-object post_dialect\" width=\"48px\" src=\"/assets/valley-girl.ico\" alt=\"Yoda\">\n    </span>\n    <div class=\"media-body\">\n        <h4 class=\"media-heading post_username\">\n            foo\n            <small class=\"text-muted post_created_at\">on 09/01/2008 at 10:00AM</small>\n        </h4>\n        <p class=\"post_message\">hello people</p>\n    </div>\n</li>\n")
+        expect(WebsocketRails[:posts]).to receive(:trigger).with('new', "<li class=\"media\" id=\"user_post\">\n    <span class=\"pull-left\">\n        <img class=\"media-object post_dialect\" width=\"48px\" src=\"/assets/valley-girl.ico\" alt=\"Valley girl\" />\n    </span>\n    <div class=\"media-body\">\n        <h4 class=\"media-heading post_username\">\n            foo\n            <small class=\"text-muted post_created_at\">on 09/01/2008 at 10:00AM</small>\n        </h4>\n        <p class=\"post_message\">hello people</p>\n    </div>\n</li>\n")
 
         expect(Comment.all.count).to eq(0)
         session['username'] = 'foo'
