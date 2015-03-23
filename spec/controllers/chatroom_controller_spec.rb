@@ -40,7 +40,16 @@ describe ChatroomController, type: :controller do
         expect(Comment.first.dialect).to eq('valley-girl')
         expect(Comment.first.message).to eq('hello people')
         expect(Comment.first.created_at).to_not be nil
+        expect(JSON.parse(response.body)).to eq('success' => true)
       end
+    end
+
+    it 'should not allow messages greater than allowed limit' do
+      session['username'] = 'foo'
+      session['dialect_slug'] = 'valley-girl'
+
+      post :comment, message: 'hello'*1000
+      expect(JSON.parse(response.body)).to eq('success' => false, 'error_message' => ChatroomController::MESSAGE_TOO_BIG_ERROR_MESSAGE)
     end
   end
 end
