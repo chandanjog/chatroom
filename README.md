@@ -15,3 +15,6 @@ A simple chat application using websockets. https://sheltered-refuge-5350.heroku
   * PORT=3000 bundle exec foreman start
     * runs the web server on port 3000
     * Also runs a scheduled job to cleanup old sessions
+
+### Running tests
+  * bundle exec rspec
